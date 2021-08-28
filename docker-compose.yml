@@ -1,0 +1,21 @@
+services:
+  rails:
+    image: ruby:3.0.2
+    command: bundle exec rails s -b 0.0.0.0 -p 3100
+    working_dir: /app
+    environment:
+      BUNDLE_PATH: /bundle
+    ports:
+    - 3100:3100
+    volumes:
+    - .:/app
+    - bundle:/bundle
+    depends_on:
+    - mongo
+  mongo:
+    image: mongo:5.0.2
+
+
+volumes:
+  bundle:
+    driver: local
