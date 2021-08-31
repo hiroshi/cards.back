@@ -3,9 +3,11 @@ git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 
 ruby '3.0.2'
 
-gem 'rails', '~> 6.1.4', '>= 6.1.4.1'
+gem 'rails'
 gem 'mongoid'
 gem 'slim'
+gem 'omniauth-google-oauth2'
+gem 'omniauth-rails_csrf_protection'
 
 # Use Puma as the app server
 gem 'puma', '~> 5.0'

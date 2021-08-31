@@ -3,4 +3,7 @@ Rails.application.routes.draw do
   get  '/cards' => 'cards#index'
   post '/cards' => 'cards#create'
   get  '/cards/new' => 'cards#new', as: :new_card
+  get  '/card/:id' => 'cards#show', as: :card
+  get  '/login' => 'sessions#new'
+  get  '/auth/google_oauth2/callback' => 'sessions#create'
 end

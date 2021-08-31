@@ -4,6 +4,7 @@ ul
   - @cards.each do |card|
     li
       = card.content
+      = link_to '[edit]', card_path(card)
 
 / = link_to 'new card', new_card_path
 = form_with model: Card.new do |f|
