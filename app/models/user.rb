@@ -2,7 +2,8 @@ class User
   include Mongoid::Document
 
   field :email, type: String
-  validates :email, presence: true
+  validates :email, presence: true, uniqueness: true
+  # TODO: unique index
 
   has_many :cards
 

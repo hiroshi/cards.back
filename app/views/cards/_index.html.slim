@@ -1,12 +1,11 @@
-h1 Cards
-
 ul
-  - @cards.each do |card|
+  - cards.each do |card|
     li
       = link_to card.content, card_path(card)
 
 / = link_to 'new card', new_card_path
-= form_with model: Card.new do |f|
+= form_with model: Card.new(parent: parent) do |f|
+  => f.hidden_field :parent_id
   => f.text_field :content, placeholder: 'message'
   / | to
   / =< f.email_field :email, placeholder: 'email'
