@@ -3,8 +3,8 @@ div
 
 p = @card.content
 
-= form_with object: @card, method: 'delete' do |f|
-  = f.button 'delete'
+/ = form_with object: @card, method: 'delete' do |f|
+/   = f.button 'delete'
 
 = render partial: 'index', locals: { cards: @card.children, parent: @card }
 

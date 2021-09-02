@@ -2,6 +2,8 @@ ul
   - cards.each do |card|
     li
       = link_to card.content, card_path(card)
+      =< form_with model: card, method: 'delete', html: {style: 'display: inline'} do |f|
+        = f.button 'detach'
 
 / = link_to 'new card', new_card_path
 = form_with model: Card.new(parent: parent) do |f|

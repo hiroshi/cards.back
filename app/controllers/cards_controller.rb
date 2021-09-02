@@ -1,11 +1,12 @@
 class CardsController < ApplicationController
   def index
-    @cards = Card.where(user: current_user, parent_id: {'$exists' => false}).all
+    # @cards = Card.where(user: current_user, parent_id: {'$exists' => false}).all
+    redirect_to current_user.root
   end
 
-  def new
-    @card = Card.new(user: current_user)
-  end
+  # def new
+  #   @card = Card.new(user: current_user)
+  # end
 
   def create
     @card = Card.where(user: current_user).create!(params.require(:card).permit(:content, :parent_id))
@@ -22,11 +23,9 @@ class CardsController < ApplicationController
 
   def destroy
     @card = Card.where(user: current_user).find(params[:id])
-    @card.destroy!
-    if @card.parent_id
-      redirect_to card_path(@card.parent_id)
-    else
-      redirect_to cards_path
-    end
+    p @card
+    parent_id = @card.parent_id
+    @card.unset(:parent_id)
+    redirect_to card_path(parent_id)
   end
 end

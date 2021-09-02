@@ -4,10 +4,14 @@ class User
   field :email, type: String
   validates :email, presence: true, uniqueness: true
   # TODO: unique index
-
-  has_many :cards
-
   before_create do
     self.email = email.downcase
+  end
+
+  # has_many :cards
+
+  belongs_to :root, class_name: 'Card', optional: true
+  after_create do
+    set(root_id: Card.create!(user: self, content: 'root').id)
   end
 end
