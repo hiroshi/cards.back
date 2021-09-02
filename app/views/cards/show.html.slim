@@ -1,5 +1,17 @@
-div
-  = link_to 'Index', cards_path
+/ div
+/   = link_to 'Index', cards_path
+ruby:
+  parents = []
+  card = @card
+  loop do
+    break unless card.parent
+    parents.unshift(card.parent)
+    card = card.parent
+  end
+- parents.each do |parent|
+  => link_to parent.content, parent
+  ' /
+
 
 p = @card.content
 
