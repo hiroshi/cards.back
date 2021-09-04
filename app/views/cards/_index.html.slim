@@ -1,14 +1,17 @@
-ul
+ul.space-y-2.pl-4
   - cards.each do |card|
-    li
-      = link_to card.content, card_path(card)
-      =< form_with model: card, method: 'delete', html: {style: 'display: inline'} do |f|
-        = f.button 'detach'
+    li.shadow-md.p-2.bg-white.border-2.flex.space-x-2
+      = link_to card.content, card_path(card, card.key)
+      .shadow-md.font-bold.bg-green-100.px-3.rounded-full
+        = card.children.count
+      .shadow-md.bg-red-200.hover:bg-red-400.px-3
+        = form_with model: card, method: 'delete' do |f|
+          = f.button 'detach'
 
-/ = link_to 'new card', new_card_path
-= form_with model: Card.new(parent: parent) do |f|
-  => f.hidden_field :parent_id
-  => f.text_field :content, placeholder: 'message'
-  / | to
-  / =< f.email_field :email, placeholder: 'email'
-  = f.submit
+  = form_with model: Card.new(parent: parent) do |f|
+    => f.hidden_field :parent_id
+    .flex.space-x-2
+      => f.text_area :content, placeholder: 'message', class: 'shadow-inner p-2 border-2'
+      / | to
+      / =< f.email_field :email, placeholder: 'email'
+      = f.submit 'Submit', class: ' box-border p-1 border-2 bg-blue-50 hover:bg-blue-200'

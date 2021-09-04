@@ -8,17 +8,19 @@ ruby:
     parents.unshift(card.parent)
     card = card.parent
   end
-- parents.each do |parent|
-  => link_to parent.content, parent
-  ' /
 
+.container.p-2.space-y-4.bg-yellow-50.h-screen
+  .flex.space-x-2
+    - parents.each do |parent|
+      => link_to parent.content, card_path(parent.id, parent.key), class: 'shadow-md bg-gray-200 hover:bg-blue-200 p-2'
 
-p = @card.content
+  .shadow-inner.p-2.bg-white.border-2
+    = @card.content
 
-/ = form_with object: @card, method: 'delete' do |f|
-/   = f.button 'delete'
+  / = form_with object: @card, method: 'delete' do |f|
+  /   = f.button 'delete'
 
-= render partial: 'index', locals: { cards: @card.children, parent: @card }
+  = render partial: 'index', locals: { cards: @card.children, parent: @card }
 
 / = form_with model: Invitaion.new(inviter: current_user) do |f|
 /   = f.input

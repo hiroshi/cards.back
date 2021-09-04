@@ -14,4 +14,6 @@ class User
   after_create do
     set(root_id: Card.create!(user: self, content: 'root').id)
   end
+
+  field :secret, type: String, default: -> { SecureRandom.urlsafe_base64 }
 end
